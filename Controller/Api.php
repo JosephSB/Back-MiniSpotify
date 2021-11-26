@@ -20,7 +20,13 @@
             require_once 'Music.php';
             $controler = new Music();
             $controler->loadModel('music');
-            $controler-> {$params[0]}();
+
+            //obtener solo el num del parametro
+            $page = isset($params[1]) 
+                        ? explode('=',rtrim($params[1],' '))[1] 
+                        : "1";
+
+            $controler-> {$params[0]}($page);
         }
 
     }

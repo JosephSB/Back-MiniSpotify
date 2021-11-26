@@ -52,6 +52,27 @@
             }
         }
 
+        public function getSongs($page)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    "SELECT u.USERNAME, s.ID_SONG, s.SONGNAME,s.GENDER,s.URL_PORTADA,s.URL_AUDIO,s.DATE_UPLOAD 
+                    FROM song s 
+                    inner join usuarios_song us on(s.ID_SONG = us.ID_SONG) 
+                    inner join usuarios u on(u.ID_USER = us.ID_USER)
+                    limit 10  OFFSET :page"
+                );
+
+                $numero = (intval($page)-1)*10;
+                $query->execute(['page'=>$numero]);
+                
+                return $query;
+            } catch (PDOException $e) {
+                echo $e;
+                return [];
+            }
+        }
+
     }
 
 ?>

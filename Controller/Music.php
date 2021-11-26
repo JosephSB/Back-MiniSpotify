@@ -43,13 +43,35 @@
             }
         }
 
-        public function sendJson($mesagge, $operation)
+        public function getSongs($page)
+        {
+            $dataQuery = $this->model->getSongs($page);
+
+            $data = array();
+            while($row = $dataQuery->fetch(PDO::FETCH_ASSOC)){
+                $item = array(
+                    'USERNAME' => $row['USERNAME'],
+                    'IDSONG' => $row['ID_SONG'],
+                    'SONGNAME' => $row['SONGNAME'],
+                    'GENDER' => $row['GENDER'],
+                    'URLPORTADA' => $row['URL_PORTADA'],
+                    'URL_AUDIO' => $row['URL_AUDIO'],
+                    'DATEUPLOAD' => $row['DATE_UPLOAD']
+                );
+                array_push($data, $item);
+            }
+           
+            echo $this->sendJson($data, true);
+
+        }
+
+        public function sendJson($data, $operation)
         {
             return json_encode(
                 array(
                     'status' => 200, 
                     'operation'=> $operation, 
-                    'message' => $mesagge
+                    'data' => $data
                 ));
         }
 
