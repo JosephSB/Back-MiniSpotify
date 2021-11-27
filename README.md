@@ -7,7 +7,7 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
 ### 1. USUARIOS
 
 #### POST:
-    ```
+```
         ADD-USUARIO:[ HOST ]/API/usuarios/adduser
         ENVIAR UN POST CON ESTE JSON
         {
@@ -17,7 +17,8 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
             "Name": [ STRING ],
             "LastName": [ STRING ]
         }
-    ```
+```
+```
     VALIDAR-USUARIO:[ HOST ]/API/usuarios/ValidateUser
     
     ENVIAR UN POST CON ESTE JSON
@@ -25,7 +26,7 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
         "Username": [ STRING ],
         "Password": [ STRING ]
     }
-    ```
+```
 
 ### 2.  SONGS
 ```
