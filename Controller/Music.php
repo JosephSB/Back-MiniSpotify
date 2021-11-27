@@ -60,7 +60,7 @@
                 $dataQuery = $this->model->getSongsByGender($data);
                 echo $this->sendJson($this->generarJson($dataQuery), true);
 
-            }else echo $this->sendJson("No se enviaron los parametros", true);
+            }else echo $this->sendJson("No se enviaron los parametros", false);
         }
 
         /*---------FUNCIONES DE AYUDA--------------*/
@@ -83,15 +83,6 @@
             return $data;
         }
 
-        public function sendJson($data, $operation)
-        {
-            return json_encode(
-                array(
-                    'status' => 200, 
-                    'operation'=> $operation, 
-                    'data' => $data
-                ));
-        }
 
         /*---------FUNCIONES QUE GUARDAN LOS FILES--------------*/
 

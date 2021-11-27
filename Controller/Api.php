@@ -29,6 +29,14 @@
             $controler-> {$params[0]}($page);
         }
 
+        public function playlist($params)
+        {
+            require_once 'Playlists.php';
+            $controler = new Playlist();
+            $controler->loadModel('Playlists');
+            $controler-> {$params[0]}();
+        }
+
     }
 
 ?>

@@ -17,6 +17,17 @@
             }
         }
 
+                
+        public function sendJson($data, $operation)
+        {
+            return json_encode(
+                array(
+                    'status' => 200, 
+                    'operation'=> $operation, 
+                    'data' => $data
+                ));
+        }
+
     }
 
 ?>
