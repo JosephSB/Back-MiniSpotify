@@ -1,17 +1,20 @@
+# BACKEND MINI SPOTIFY
 
+## CONSULTAS
+Puedes poner tus propias configuraciones en el archivo _Config/config.php_
+[ HOST ]: http://localhost/Spotify
 
-----------CONSULTAS----------
-HOST: http://localhost/Spotify
-
-1. USUARIOS
-
+### 1. USUARIOS
+```
     ADD-USUARIO:
+```
+### 2.  SONGS
+```
+    POST:
+    UPLOAD-SOUND: [ HOST ]/API/music/Upload
+    
+    GET:
+    GET-SONGS: [ HOST ]/API/music/getSongs/page=[ pagina ]
 
-2.  SONGS
-
-    UPLOAD-SOUND: <HOST>/API/music/Upload
-
-    GET-SONGS: <HOST>/API/music/getSongs/page=<pagina>
-
-
+```
 
