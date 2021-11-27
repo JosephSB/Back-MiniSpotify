@@ -73,6 +73,29 @@
             }
         }
 
+        public function getSongsByGender($data)
+        {
+            try{
+                $query = $this->db->connect()->prepare(
+                    "SELECT u.USERNAME, s.ID_SONG, s.SONGNAME,s.GENDER,s.URL_PORTADA,s.URL_AUDIO,s.DATE_UPLOAD 
+                    FROM song s 
+                    inner join usuarios_song us on(s.ID_SONG = us.ID_SONG) 
+                    inner join usuarios u on(u.ID_USER = us.ID_USER)
+                    WHERE gender = :gender
+                    limit 10 OFFSET :page"
+                );
+
+                $numeroPag = (intval($data['Pagina'])-1)*10;
+
+                $query->execute(['page'=>$numeroPag, 'gender' => $data['Gender']]);
+
+                return $query;
+            }catch (PDOException $e){
+                echo $e;
+                return [];
+            }
+        }
+
     }
 
 ?>

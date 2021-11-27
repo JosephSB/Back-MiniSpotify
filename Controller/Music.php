@@ -47,8 +47,28 @@
         {
             $dataQuery = $this->model->getSongs($page);
 
+            echo $this->sendJson($this->generarJson($dataQuery), true);
+
+        }
+
+        public function getSongsbyGender()
+        {
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            if(isset($data['Gender']) &&  isset($data['Pagina'])){
+
+                $dataQuery = $this->model->getSongsByGender($data);
+                echo $this->sendJson($this->generarJson($dataQuery), true);
+
+            }else echo $this->sendJson("No se enviaron los parametros", true);
+        }
+
+        /*---------FUNCIONES DE AYUDA--------------*/
+
+        public function generarJson($query)
+        {
             $data = array();
-            while($row = $dataQuery->fetch(PDO::FETCH_ASSOC)){
+            while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $item = array(
                     'USERNAME' => $row['USERNAME'],
                     'IDSONG' => $row['ID_SONG'],
@@ -60,9 +80,7 @@
                 );
                 array_push($data, $item);
             }
-           
-            echo $this->sendJson($data, true);
-
+            return $data;
         }
 
         public function sendJson($data, $operation)
@@ -74,6 +92,8 @@
                     'data' => $data
                 ));
         }
+
+        /*---------FUNCIONES QUE GUARDAN LOS FILES--------------*/
 
         public function saveMusic($fileSONG,$name)
         {
