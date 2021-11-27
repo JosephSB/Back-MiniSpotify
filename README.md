@@ -5,10 +5,10 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
 [ HOST ]: http://localhost/Spotify
 
 ### 1. USUARIOS
-```
-    POST:
+
+#### POST:
+    ```
         ADD-USUARIO:[ HOST ]/API/usuarios/adduser
-        ```
         ENVIAR UN POST CON ESTE JSON
         {
             "Username": [ STRING ],
@@ -17,16 +17,16 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
             "Name": [ STRING ],
             "LastName": [ STRING ]
         }
-        ```
-        VALIDAR-USUARIO:[ HOST ]/API/usuarios/ValidateUser
-        ```
-        ENVIAR UN POST CON ESTE JSON
-        {
-            "Username": [ STRING ],
-            "Password": [ STRING ]
-        }
-        ```
-```
+    ```
+    VALIDAR-USUARIO:[ HOST ]/API/usuarios/ValidateUser
+    
+    ENVIAR UN POST CON ESTE JSON
+    {
+        "Username": [ STRING ],
+        "Password": [ STRING ]
+    }
+    ```
+
 ### 2.  SONGS
 ```
     POST:
