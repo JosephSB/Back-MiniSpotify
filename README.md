@@ -39,6 +39,15 @@ _[ HOST ]: http://localhost/Spotify_
         ENTRADA:
         FORMDATA, GUIARSE DEL FORM.HTML
 ```
+```
+        GET-SOUNDSBYGENDER: [ HOST ]/API/music/getSongsbyGender
+        
+        ENTRADA:
+        {
+            "Gender": [STRING],
+            "Pagina": [INT]
+        }
+```
 ####    GET:
 ```
         GET-SONGS: [ HOST ]/API/music/getSongs/page=[ pagina ]
