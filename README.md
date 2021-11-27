@@ -40,7 +40,7 @@ _[ HOST ]: http://localhost/Spotify_
         FORMDATA, GUIARSE DEL FORM.HTML
 ```
 ```
-        GET-SOUNDSBYGENDER: [ HOST ]/API/music/getSongsbyGender
+        GET-SOUNDS BY GENDER: [ HOST ]/API/music/getSongsbyGender
         
         ENTRADA:
         {
@@ -52,5 +52,26 @@ _[ HOST ]: http://localhost/Spotify_
 ```
         GET-SONGS: [ HOST ]/API/music/getSongs/page=[ pagina ]
 ```
+### 3.  PLAYLISTS
+####    POST:
+```
+    CREATE-PLAYLIST: [ HOST ]/API/playlist/newPlaylist
 
+    ENTRADA:
+    {
+    "IDusuario": [STRING],
+    "NamePlaylist": [STRING],
+    "URL_Portada": [STRING],
+    "Descripcion": [STRING]
+    }
+```
+```
+    ADD SONG IN PLAYLIST: [ HOST ]/API/playlist/addSongPlalist
+    
+    ENTRADA:
+    {
+        "IDsong":[STRING],
+        "IDplaylist": [STRING]
+    }
+```
 
