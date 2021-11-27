@@ -2,14 +2,15 @@
 
 ## CONSULTAS
 Puedes poner tus propias configuraciones en el archivo _Config/config.php_
-[ HOST ]: http://localhost/Spotify
+_[ HOST ]: http://localhost/Spotify_
 
 ### 1. USUARIOS
 
 #### POST:
 ```
-        ADD-USUARIO:[ HOST ]/API/usuarios/adduser
-        ENVIAR UN POST CON ESTE JSON
+    ADD-USUARIO:[ HOST ]/API/usuarios/adduser
+    
+    ENTRADA:
         {
             "Username": [ STRING ],
             "Password": [ STRING ],
@@ -17,24 +18,30 @@ Puedes poner tus propias configuraciones en el archivo _Config/config.php_
             "Name": [ STRING ],
             "LastName": [ STRING ]
         }
+
+
 ```
 ```
     VALIDAR-USUARIO:[ HOST ]/API/usuarios/ValidateUser
     
-    ENVIAR UN POST CON ESTE JSON
-    {
-        "Username": [ STRING ],
-        "Password": [ STRING ]
-    }
+    ENTRADA:
+        {
+            "Username": [ STRING ],
+            "Password": [ STRING ]
+        }
 ```
 
 ### 2.  SONGS
+####    POST:
 ```
-    POST:
         UPLOAD-SOUND: [ HOST ]/API/music/Upload
-
-    GET:
-        GET-SONGS: [ HOST ]/API/music/getSongs/page=[ pagina ]
-
+        
+        ENTRADA:
+        FORMDATA, GUIARSE DEL FORM.HTML
 ```
+####    GET:
+```
+        GET-SONGS: [ HOST ]/API/music/getSongs/page=[ pagina ]
+```
+
 
