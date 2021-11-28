@@ -74,4 +74,21 @@ _[ HOST ]: http://localhost/Spotify_
         "IDplaylist": [STRING]
     }
 ```
+```
+    GET SONGS BY PLAYLIST: [ HOST ]/API/playlist/getPlaylist
+    
+    ENTRADA:
+    {
+        "userID":[STRING]
+    }
+```
+```
+    GET SONGS BY PLAYLIST: [ HOST ]/API/playlist/getSongsByPlaylist
+    
+    ENTRADA:
+    {
+        "playlistID":[STRING]
+    }
+```
+
 
