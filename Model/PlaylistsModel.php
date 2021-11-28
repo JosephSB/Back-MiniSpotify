@@ -103,6 +103,58 @@
             }
         }
 
+        public function getPlaylistByUser($userID)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    'SELECT p.ID_PLAYLIST,p.NAME FROM usuarios_playlist Up 
+                    INNER JOIN playlist p on(up.ID_PLAYLIST = p.ID_PLAYLIST)
+                    WHERE ID_USER = :userID'
+                );
+
+                $query->execute(['userID'=>$userID]);
+                return $query;
+            } catch (PDOException $e) {
+                echo $e;
+                return [];
+            }
+        }
+
+        public function detailPlaylist($playlistID)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    'SELECT ID_PLAYLIST, NAME,URL_PORTADA,CREATION_DATE,DESCRIPTION FROM playlist 
+                    WHERE ID_PLAYLIST = :playlistID'
+                );
+
+                $query->execute(['playlistID'=>$playlistID]);
+                return $query;
+            } catch (PDOException $e) {
+                echo $e;
+                return [];
+            } 
+        }
+
+        public function findSongsByPlaylist($playlistID)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    'SELECT u.USERNAME,s.ID_SONG, s.SONGNAME,s.GENDER,s.URL_PORTADA,s.URL_AUDIO,s.DATE_UPLOAD FROM playlist_song ps
+                    INNER JOIN SONG s on(ps.ID_SONG = s.ID_SONG)
+                    INNER JOIN usuarios_song us on (us.ID_SONG = s.ID_SONG)
+                    INNER JOIN usuarios u on (u.ID_USER = us.ID_USER)
+                    WHERE ps.ID_PLAYLIST = :playlistID'
+                );
+
+                $query->execute(['playlistID'=>$playlistID]);
+                return $query;
+            } catch (PDOException $e) {
+                echo $e;
+                return [];
+            }
+        }
+
     }
 
 ?>

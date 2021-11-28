@@ -45,6 +45,56 @@
             }else echo $this->sendJson('Datos Incompletos', false);
         }
 
+        public function getPlaylist()
+        {
+
+            $data= json_decode(file_get_contents('php://input'), true);
+
+            if($this->model->findUserbyId($data['userID'])){
+                $query = $this->model->getPlaylistByUser($data['userID']);
+                $data = array();
+                while($row = $query->fetch(PDO::FETCH_ASSOC)){
+                    $item = array(
+                        'ID_PLAYLIST' => $row['ID_PLAYLIST'],
+                        'NAME' => $row['NAME']
+                    );
+                    array_push($data, $item);
+                }
+                echo $this->sendJson( $data, true);
+
+            }else echo $this->sendJson('El usuario no existe', false);
+        }
+
+        public function getSongsByPlaylist()
+        {
+            $data= json_decode(file_get_contents('php://input'), true);
+
+            if($this->model->existPlaylistID($data['playlistID'])){
+
+                $dataPlaylist = $this->model->detailPlaylist($data['playlistID']);
+                $SongsPlaylist = $this->model->findSongsByPlaylist($data['playlistID']);
+                
+                $data = array();
+                
+                $row = $dataPlaylist->fetch(PDO::FETCH_ASSOC);
+
+                $item = array(
+                    'ID_PLAYLIST' => $row['ID_PLAYLIST'],
+                    'NAME' => $row['NAME'],
+                    'URL_PORTADA' => $row['URL_PORTADA'],
+                    'CREATION_DATE' => $row['CREATION_DATE'],
+                    'DESCRIPTION' => $row['DESCRIPTION'],
+                    'SONGS' => $this->generarJson($SongsPlaylist)
+                );
+                array_push($data, $item);
+
+                echo $this->sendJson($data, true);
+
+            }else echo $this->sendJson('La playlist no existe', false);
+
+
+        }
+
     }
 
 
