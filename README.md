@@ -75,7 +75,7 @@ _[ HOST ]: http://localhost/Spotify_
     }
 ```
 ```
-    GET SONGS BY PLAYLIST: [ HOST ]/API/playlist/getPlaylist
+    GET PLAYLIST BY USER: [ HOST ]/API/playlist/getPlaylist
     
     ENTRADA:
     {
