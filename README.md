@@ -31,6 +31,15 @@ _[ HOST ]: http://localhost/Spotify_
         }
 ```
 
+```
+    VALIDAR-TOKEN:[ HOST ]/API/usuarios/validarToken
+    
+    ENTRADA:
+        {
+            "Token": [ STRING ]
+        }
+```
+
 ### 2.  SONGS
 ####    POST:
 ```
