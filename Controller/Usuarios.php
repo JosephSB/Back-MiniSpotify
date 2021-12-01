@@ -19,14 +19,14 @@
                 ){
                     
                     if($this->model->add($data)){
-                        echo json_encode(array('status' => 200, 'error'=> false, 'message' => 'Usuario Añadido Correctamente'));
+                        echo $this->sendJson('Usuario Añadido Correctamente', true);
                     }else{
-                        echo json_encode(array('status' => 400, 'error'=> true, 'message' => 'No se puedo Anadir al usuario'));
+                        echo $this->sendJson('No se puedo Anadir al usuario', false);
                     }
                 }
-                else echo json_encode(array('status' => 400, 'error'=> true, 'message' => 'Los datos que envio son invalidos'));
+                else echo $this->sendJson('Los datos que envio son invalidos', false);
             }else{
-                echo json_encode(array('status' => 400, 'error'=> true, 'message' => 'Los datos estan incompletos'));
+                echo $this->sendJson('Los datos estan incompletos', false);
             }
         
         }
@@ -35,32 +35,35 @@
         {
             $data = json_decode(file_get_contents('php://input'), true);
             if(isset($data['Username']) && isset($data['Password'])){
-                if($this->model->findUser($data['Username'],$data['Password'])){
-                    echo json_encode(
-                        array(
-                            'status' => 200, 
-                            'operation'=> true, 
-                            'message' => 'Usuario validado Correctamente',
-                            'usuario' => $this->model->getUserId()
-                        ));
-                }else{
-                    echo json_encode(
-                        array('
-                        status' => 200, 
-                        'operation'=> false, 
-                        'message' => 'No se pudo encontrar al usuario'
-                    ));
-                }
-            }else{
-                echo json_encode(
-                    array(
-                        'status' => 200, 
-                        'operation'=> false, 
-                        'message' => 'No se envio parametros'
-                    ));
-            }
 
+                if($this->model->findUser($data['Username'],$data['Password'])){
+
+                    $idUser = $this->model->getUserId();
+
+                    if($this->model->generarToken($idUser)){
+                        $data = $this->model->getDataUser();
+                        echo $this->sendJson($data, true);
+                    }else echo $this->sendJson('Problemas al generar el token', false);
+                    
+                }else  echo $this->sendJson('No se pudo encontrar al usuario', false);
+
+            }else echo $this->sendJson('No se envio parametros', false);
         }
+
+        public function validarToken()
+        {
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            if(isset($data['Token'])){
+
+                if($this->model->searchToken($data['Token'])){
+                    $data = $this->model->getDataUser();
+                    echo $this->sendJson($data, true);
+                }else echo $this->sendJson('No se encontro el token', false);
+
+            }else echo $this->sendJson('No se envio el token', false);
+        }
+
 
 
     }

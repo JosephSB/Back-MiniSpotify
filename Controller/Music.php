@@ -65,7 +65,7 @@
 
         /*---------FUNCIONES QUE GUARDAN LOS FILES--------------*/
 
-        public function saveMusic($fileSONG,$name)
+        private function saveMusic($fileSONG,$name)
         {
             $directorio = "Uploads/Musics/";
             $archivo = $directorio . basename($fileSONG["name"]);
@@ -82,7 +82,7 @@
             
         }
 
-        public function saveImg($fileIMG,$name)
+        private function saveImg($fileIMG,$name)
         {
             $directorio = "Uploads/Img/";
             $archivo = $directorio . basename($fileIMG["name"]);
