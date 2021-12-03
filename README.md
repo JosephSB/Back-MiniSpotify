@@ -40,6 +40,16 @@ _[ HOST ]: http://localhost/Spotify_
         }
 ```
 
+```
+    GET-DATA-BY-USER:[ HOST ]/API/usuarios/allInfoUsuario
+    
+    ENTRADA:
+        {
+            "UserID": [ STRING ],
+            "Page": [ INT ]
+        }
+```
+
 ### 2.  SONGS
 ####    POST:
 ```
