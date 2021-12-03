@@ -28,6 +28,25 @@
                 return false;
             }
         }
+        public function findUserbyUsername($userName)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    'SELECT * FROM usuarios WHERE USERNAME = :USERNAME'
+                );
+                $query->execute([
+                    'USERNAME'=>$userName
+                ]);
+                
+                while($query->fetch()){
+                    return true;
+                }
+                return false;
+            } catch (PDOException $e) {
+                echo $e;
+                return false;
+            }
+        }
 
     }
 

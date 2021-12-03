@@ -17,12 +17,14 @@
                 $validate -> validatePass($data['Password'])&&
                 $validate -> validateEmail($data['Email'])
                 ){
-                    
-                    if($this->model->add($data)){
-                        echo $this->sendJson('Usuario Añadido Correctamente', true);
-                    }else{
-                        echo $this->sendJson('No se puedo Anadir al usuario', false);
-                    }
+                    if(!$this->model->findUserbyUsername($data['Username'])){
+
+                        if($this->model->add($data)){
+                            echo $this->sendJson('Usuario Añadido Correctamente', true);
+                        }else echo $this->sendJson('No se puedo Anadir al usuario', false);
+                        
+                    }else echo $this->sendJson('El username ya existe', false);
+
                 }
                 else echo $this->sendJson('Los datos que envio son invalidos', false);
             }else{
@@ -62,6 +64,11 @@
                 }else echo $this->sendJson('No se encontro el token', false);
 
             }else echo $this->sendJson('No se envio el token', false);
+        }
+
+        public function allInfoUsuario()
+        {
+            # code...
         }
 
 

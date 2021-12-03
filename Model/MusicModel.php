@@ -12,8 +12,8 @@
                     "INSERT INTO song VALUES (:idSong,:songname,:gender,:url_portada,:url_aud,CURRENT_TIME(),:datePremiere)"
                 );
                 $id ="#".substr(uniqid(),3,8).substr($data['gender'],0,2).substr(uniqid(),0,2);
-                $urlSong= constant('URL')."/Uploads/Musics/".$id.".mp3";
-                $urlImg= constant('URL')."/Uploads/Img/".$id.".".$type;
+                $urlSong= constant('URL')."/Uploads/Musics/".$data['songname'].".mp3";
+                $urlImg= constant('URL')."/Uploads/Img/".$data['songname'].".".$type;
 
                 $query->execute([
                     'idSong'=>$id,//generar id
