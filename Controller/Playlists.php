@@ -56,7 +56,8 @@
                 while($row = $query->fetch(PDO::FETCH_ASSOC)){
                     $item = array(
                         'ID_PLAYLIST' => $row['ID_PLAYLIST'],
-                        'NAME' => $row['NAME']
+                        'NAME' => $row['NAME'],
+                        'PORTADA' => $row['URL_PORTADA']
                     );
                     array_push($data, $item);
                 }

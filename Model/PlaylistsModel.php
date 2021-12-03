@@ -107,7 +107,7 @@
         {
             try {
                 $query = $this->db->connect()->prepare(
-                    'SELECT p.ID_PLAYLIST,p.NAME FROM usuarios_playlist Up 
+                    'SELECT p.ID_PLAYLIST,p.NAME,p.URL_PORTADA FROM usuarios_playlist Up 
                     INNER JOIN playlist p on(up.ID_PLAYLIST = p.ID_PLAYLIST)
                     WHERE ID_USER = :userID'
                 );
