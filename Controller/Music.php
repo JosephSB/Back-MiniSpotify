@@ -20,12 +20,15 @@
                     if( !empty($_POST['id_user']) && !empty($_POST['songname']) && 
                     !empty($_POST['gender']) ){
 
+                        //generar id
+                        $id ="S".substr(uniqid(),3,8).substr($_POST['gender'],0,2).substr(uniqid(),0,2);
+
                         //valida y guarda los archivos enviados
-                        if($this->saveMusic($fileSONG, $_POST['songname']) &&
-                        $this->saveImg($fileIMG, $_POST['songname'])){
+                        if($this->saveMusic($fileSONG,$id) &&
+                        $this->saveImg($fileIMG,$id)){
 
                             $type = explode("/",$fileIMG['type'])[1];
-                            if($this->model->addSong($_POST,$type)) echo $this->sendJson('Archivos agregados', true);
+                            if($this->model->addSong($_POST,$type,$id)) echo $this->sendJson('Archivos agregados', true);
                             else echo $this->sendJson('error al guardar sus archivos a la bd', false);
 
                         }else echo $this->sendJson('error al guardar sus archivos', false);
