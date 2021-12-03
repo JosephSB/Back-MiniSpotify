@@ -68,7 +68,22 @@
 
         public function allInfoUsuario()
         {
-            # code...
+            $data = json_decode(file_get_contents('php://input'), true);
+            if(count($data) == 2 && !empty($data['UserID']) && !empty($data['Page'])){
+
+                if($this->model->getdataByUser($data['UserID'])){
+                   
+                    $dataUser = $this->model->getDataUser();
+                    $query = $this->model->getSongsByUser($data['UserID'], $data['Page'] );
+
+                    $dataUser['songs'] = $this->generarJson($query);
+
+                    echo $this->sendJson($dataUser, true);
+
+                }else echo $this->sendJson('El id es incorrecto', false);
+
+            }else echo $this->sendJson('Parametros incompletos', false);
+
         }
 
 

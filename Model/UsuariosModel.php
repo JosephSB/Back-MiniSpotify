@@ -128,7 +128,6 @@
                     $this->dataUser = array(
                         'UserID' => $row['ID_USER'],
                         'Username' => $row['USERNAME'],
-                        'Token' => $row['TOKEN'],
                         'Name' => $row['NAME']." ".$row['LASTNAME'],
                         'Email' => $row['EMAIL']
                     );
@@ -139,6 +138,56 @@
             } catch (PDOException $e) {
                 echo $e;
                 return false;
+            }
+        }
+
+        public function getdataByUser($userID)
+        {
+            try {
+                $query = $this->db->connect()->prepare(
+                    'SELECT ID_USER, USERNAME,EMAIL, CONCAT(NAME, " ", LASTNAME) AS FULLNAME 
+                    FROM usuarios WHERE ID_USER = :UserID'
+                );
+                $query->execute(['UserID' => $userID]);
+
+                while($row = $query->fetch()){
+                    $this->dataUser = array(
+                        'UserID' => $row['ID_USER'],
+                        'Username' => $row['USERNAME'],
+                        'Name' => $row['FULLNAME'],
+                        'Email' => $row['EMAIL']
+                    );
+                    return true;
+                }
+
+                return false;
+            } catch (PDOException $e) {
+                echo $e;
+                return false;
+            } 
+        }
+
+        
+        public function getSongsByUser($userId,$pag)
+        {
+            try{
+                $query = $this->db->connect()->prepare(
+                    "SELECT u.USERNAME, s.ID_SONG, s.SONGNAME,s.GENDER,s.URL_PORTADA,s.URL_AUDIO,s.DATE_UPLOAD 
+                    FROM song s 
+                    inner join usuarios_song us on(s.ID_SONG = us.ID_SONG) 
+                    inner join usuarios u on(u.ID_USER = us.ID_USER)
+                    WHERE u.ID_USER = :userid
+                    limit 20 OFFSET :page"
+                );
+
+                $numeroPag = (intval($pag)-1)*20;
+
+                $query->execute(['userid'=>$userId, 'page' => $numeroPag]);
+
+                return $query;
+            }catch (PDOException $e){
+                echo $e;
+                return [];
             }
         }
 
