@@ -1,5 +1,12 @@
 # BACKEND: API MINI SPOTIFY
 
+## INSTALACION Y CONFIGURACION
+
+- Crea un servidor local (yo use xammp)
+- Importa a mysql la bd _minispotiffy.sql_
+- Ve a la carpeta _Config_ y agrega tus configuraciones de bd y url
+- Enciende tu servidor y listo ya tienes la api
+
 ## INFORMACION
 
 Una api pequeña que envia y recibe canciones, crea playlist y logea usuarios.
