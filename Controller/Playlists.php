@@ -1,29 +1,42 @@
 <?php
 
+
     class Playlist extends Controller{
         function __construct(){
             parent::__construct();
         }
-
+        //agregando file portada 
         public function newPlaylist()
         {
-            $data = json_decode(file_get_contents('php://input'), true);
 
-            if(count($data)==4){
+            if( count($_POST) == 3 && count($_FILES) == 1 ){
 
-                if($this->model->findUserbyId( $data['IDusuario'])){
-                    if(strlen(trim($data['NamePlaylist']))>=5 && 
-                    !empty($data['Descripcion']))
+                $fileIMG = $_FILES['file_Portada'];
+
+                if($this->model->findUserbyId( $_POST['id_user'])){
+
+                    
+                    if(strlen(trim($_POST['NamePlaylist']))>=5)
                     {
-                        if($this->model->addPlaylist($data)){
 
-                            echo $this->sendJson('Playlist creada exitosamente', true);
+                        //generar id
+                        $id ="P".substr(uniqid(),3,8).substr($_POST['id_user'],2,2).substr(uniqid(),0,2);
+                        
+                        if($this->saveImg($fileIMG,$id)){
 
-                        }else echo $this->sendJson('Ocurrio un error al crear la playlist', false);
+                            $type = explode("/",$fileIMG['type'])[1];
+                            if($this->model->addPlaylist($_POST,$type,$id)) echo $this->sendJson('Playlist creada exitosamente', true);
+                            else echo $this->sendJson('Ocurrio un error al crear la playlist', false);
 
-                    }else echo $this->sendJson('Datos vacios', false);
+                        }else echo $this->sendJson('error al guardar sus archivos, verifique que el tipo sea JPG o JPEG', false);
+                    
+                    }else echo $this->sendJson('El nombre de tu playlist tiene que ser mas de 5 digitos', false);
+                    
+
                 }else echo $this->sendJson('El usuario no existe', false);
+
             }else echo $this->sendJson('Datos Incompletos', false);
+            
         }
 
         public function addSongPlalist()

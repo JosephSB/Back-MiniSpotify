@@ -5,23 +5,23 @@
             parent::__construct();
         }
 
-        public function addPlaylist($data)
+        public function addPlaylist($data,$type,$id)
         {
             try {
                 $query = $this->db->connect()->prepare(
                     'INSERT INTO playlist VALUES (:idPlaylist, :namePlaylist, :urlPortada,CURRENT_TIME(),:description)'
                 );
 
-                $idplaylist ="#".substr(uniqid(),3,8).substr(uniqid(),0,2).substr(uniqid(),0,2);
+                $urlImg= constant('URL')."/Uploads/Img/".$id.".".$type;
 
                 $query->execute([
-                    'idPlaylist'=>$idplaylist,//generar id
+                    'idPlaylist'=>$id,//generar id
                     'namePlaylist'=>$data['NamePlaylist'],
-                    'urlPortada' => $data['URL_Portada'],
+                    'urlPortada' => $urlImg,
                     'description' => $data['Descripcion']
                 ]);
 
-                $this->addAutorPlaylist($data['IDusuario'],$idplaylist);
+                $this->addAutorPlaylist($data['id_user'],$id);
                 return true;
 
             } catch (PDOException $e) {
@@ -44,7 +44,7 @@
                 return true;
 
             } catch (PDOException $e) {
-                echo $e;
+                //echo $e;
                 return false;
             }
         }

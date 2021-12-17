@@ -1,5 +1,16 @@
 # BACKEND: API MINI SPOTIFY
 
+## INFORMACION
+
+Una api pequeña que envia y recibe canciones, crea playlist y logea usuarios.
+algunas mejoras que se agregaran proximamente seran: 
+- Que en las playlist no se repitan canciones
+- Mejorar logeo con token
+- Empezar a crear la api para consultar y agregar Follows
+- Agregar Buscador de canciones y playlist
+- Una ves listo los follows agregar la lista de canciones favoritas
+- Agregar para que no puedas agregar canciones a una playlist que no es tuya
+
 ## CONSULTAS
 Puedes poner tus propias configuraciones en el archivo _Config/config.php_
 _[ HOST ]: http://localhost/Spotify_
